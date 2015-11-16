@@ -1,0 +1,13 @@
+{
+"builders":[{
+  "type": "docker",
+  "image": "ubuntu",
+  "export_path": "image.tar"
+}],
+"provisioners":[
+{
+   "type": "chef-solo",
+   "cookbook_paths": ["./vendor/cookbooks"],
+   "run_list":["recipe[testweb::default]"]
+}]
+}
