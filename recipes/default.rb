@@ -9,16 +9,6 @@
 
 include_recipe 'apt::default'
 
-# include_recipe 'nginx::default'
-
-# directory '/var/www/nginx-default' do
-#   owner 'root'
-#   group 'root'
-#   mode '0755'
-#   action :create
-#   recursive true
-# end
-
 package 'nginx' do
   action :install
 end
@@ -35,14 +25,6 @@ service 'nginx' do
   supports :status => true, :restart => true, :reload => true
   action [:start, :enable]
 end
-
-# template '/usr/share/nginx/html/index.html' do
-#   source 'index.html.erb'
-#   owner 'www-data'
-#   group 'www-data'
-#   mode '0644'
-#   notifies :restart, 'service[nginx]'
-# end
 
 cookbook_file '/usr/share/nginx/html/index.php' do
   source 'info.php'
@@ -65,7 +47,7 @@ file '/usr/share/nginx/html/index.html' do
   notifies :restart, 'service[nginx]'
 end
 
-ruby_block "smb client signing" do
+ruby_block "update php path" do
 	block do
 		rc = Chef::Util::FileEdit.new("/etc/php5/fpm/php.ini")
 		rc.insert_line_if_no_match(
@@ -74,6 +56,13 @@ ruby_block "smb client signing" do
 		)
 		rc.write_file
 	end
+end
+
+cookbook_file '/start_nginx.bash' do
+  source 'start_nginx.bash'
+  owner 'root'
+  group 'root'
+  mode '0755'
 end
 
 
