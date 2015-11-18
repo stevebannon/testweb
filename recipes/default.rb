@@ -58,7 +58,7 @@ ruby_block "update php path" do
 	end
 end
 
-cookbook_file '/start_nginx.bash' do
+cookbook_file '/etc/start_nginx.bash' do
   source 'start_nginx.bash'
   owner 'root'
   group 'root'
