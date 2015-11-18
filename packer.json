@@ -1,24 +1,31 @@
 {
-"builders":[{
-  "type": "docker",
-  "image": "ubuntu",
-  "commit": "true",
-  "login": "true",
-  "login_email": "sbannon@nist.gov",
-  "login_username": "packer",
-  "login_password": "packer",
-  "login_server": "dockreg.el.nist.gov:8080"
-}],
-"provisioners":[
-{
-   "type": "shell",
-   "inline": ["apt-get -y install curl"]
-},
-{
-   "type": "chef-solo",
-   "cookbook_paths": ["./vendor/cookbooks"],
-   "run_list":["recipe[testweb::default]"]
-}]
+"builders":
+[
+	{
+		"type": "docker",
+		"image": "ubuntu",
+		"commit": "true",
+		"login": "true",
+		"login_email": "sbannon@nist.gov",
+		"login_username": "packer",
+		"login_password": "packer",
+		"login_server": "dockreg.el.nist.gov:8080"
+	}
+],
+
+"provisioners":
+[
+	{
+		"type": "shell",
+		"inline": ["apt-get -y install curl"]
+	},
+	{
+		"type": "chef-solo",
+		"cookbook_paths": ["./vendor/cookbooks"],
+		"run_list": ["recipe[testweb::default]"]
+	}
+],
+
 "post-processors": [
 	[
 		{
