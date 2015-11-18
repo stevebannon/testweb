@@ -2,7 +2,7 @@
 <?php
  
  if ($_POST["message"]=="") {
- 	$_POST["message"]="type a message";
+ 	$_POST["message"]="next message";
  }
 
 require_once("/usr/share/php/libzend-framework-php/Zend/Text/Figlet.php");
