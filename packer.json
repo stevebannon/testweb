@@ -2,7 +2,12 @@
 "builders":[{
   "type": "docker",
   "image": "ubuntu",
-  "export_path": "image.tar"
+  "commit": "true",
+  "login": "true",
+  "login_email": "sbannon@nist.gov",
+  "login_username": "packer",
+  "login_password": "packer",
+  "login_server": "dockreg.el.nist.gov:8080"
 }],
 "provisioners":[
 {
@@ -14,4 +19,14 @@
    "cookbook_paths": ["./vendor/cookbooks"],
    "run_list":["recipe[testweb::default]"]
 }]
+"post-processors": [
+	[
+		{
+			"type": "docker-tag",
+			"repository": "dockreg.el.nist.gov:8080/testweb",
+			"tag": "latest"
+		},
+		"docker-push"
+	]
+]
 }
