@@ -1,0 +1,30 @@
+{
+"builders":
+[
+	{
+		"type": "docker",
+		"image": "debian",
+		"export_path": "image.tar"
+	}
+],
+
+"provisioners":
+[
+	{
+		"type": "chef-solo",
+		"cookbook_paths": ["./vendor/cookbooks"],
+		"run_list": ["recipe[testweb::default]"]
+	}
+],
+
+"post-processors": [
+	[
+		{
+			"type": "docker-tag",
+			"repository": "testweb",
+			"tag": "latest"
+		},
+		"docker-push"
+	]
+]
+}
