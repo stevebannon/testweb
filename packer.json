@@ -5,11 +5,7 @@
 		"type": "docker",
 		"image": "ubuntu",
 		"commit": "true",
-		"login": "true",
-		"login_email": "sbannon@nist.gov",
-		"login_username": "packer",
-		"login_password": "packer",
-		"login_server": "dockreg.el.nist.gov"
+		"login_server": "principal.el.nist.gov:5000"
 	}
 ],
 
@@ -30,8 +26,9 @@
 	[
 		{
 			"type": "docker-tag",
-			"repository": "dockreg.el.nist.gov/testweb",
-			"tag": "latest"
+			"repository": "principal.el.nist.gov:5000/testweb",
+			"tag": "latest",
+			"force": "true"
 		},
 		"docker-push"
 	]

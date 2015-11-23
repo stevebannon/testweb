@@ -2,7 +2,7 @@
 <?php
  
  if ($_POST["message"]=="") {
- 	$_POST["message"]="next message";
+ 	$_POST["message"]="11/23/2015;
  }
 
 require_once("/usr/share/php/libzend-framework-php/Zend/Text/Figlet.php");
