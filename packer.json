@@ -9,7 +9,7 @@
 		"login_email": "sbannon@nist.gov",
 		"login_username": "packer",
 		"login_password": "packer",
-		"login_server": "dockreg.el.nist.gov:8080"
+		"login_server": "dockreg.el.nist.gov"
 	}
 ],
 
@@ -30,7 +30,7 @@
 	[
 		{
 			"type": "docker-tag",
-			"repository": "dockreg.el.nist.gov:8080/testweb",
+			"repository": "dockreg.el.nist.gov/testweb",
 			"tag": "latest"
 		},
 		"docker-push"
