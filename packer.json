@@ -3,7 +3,7 @@
 [
 	{
 		"type": "docker",
-		"image": "ubuntu",
+		"image": "centos:6.7",
 		"commit": "true",
 		"login_server": "principal.el.nist.gov:5000"
 	}
@@ -12,13 +12,11 @@
 "provisioners":
 [
 	{
-		"type": "shell",
-		"inline": ["apt-get -y install curl"]
-	},
-	{
 		"type": "chef-solo",
 		"cookbook_paths": ["./vendor/cookbooks"],
-		"run_list": ["recipe[testweb::default]"]
+		"run_list": ["recipe[testweb::default]"],
+		"install_command": "curl -L https://www.chef.io/chef/install.sh | bash",
+		"execute_command": "chef-solo --no-color -c {{.ConfigPath}} -j {{.JsonPath}}"
 	}
 ],
 
