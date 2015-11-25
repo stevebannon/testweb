@@ -26,7 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # If this value is a shorthand to a box in Vagrant Cloud then
   # config.vm.box_url doesn't need to be specified.
   # config.vm.box = 'chef/ubuntu-14.04'
-  config.vm.box = 'bento/centos-7.1'
+  config.vm.box = 'bento/centos-6.7'
 
 
   # Assign this VM to a host-only network IP, allowing you to access it
