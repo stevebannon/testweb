@@ -3,26 +3,20 @@
 [
 	{
 		"type": "docker",
-		"image": "ubuntu",
+		"image": "centos:6.7",
 		"commit": "true",
-		"login": "true",
-		"login_email": "sbannon@nist.gov",
-		"login_username": "packer",
-		"login_password": "packer",
-		"login_server": "dockreg.el.nist.gov:8080"
+		"login_server": "principal.el.nist.gov:5000"
 	}
 ],
 
 "provisioners":
 [
 	{
-		"type": "shell",
-		"inline": ["apt-get -y install curl"]
-	},
-	{
 		"type": "chef-solo",
 		"cookbook_paths": ["./vendor/cookbooks"],
-		"run_list": ["recipe[testweb::default]"]
+		"run_list": ["recipe[testweb::default]"],
+		"install_command": "curl -L https://www.chef.io/chef/install.sh | bash",
+		"execute_command": "chef-solo --no-color -c {{.ConfigPath}} -j {{.JsonPath}}"
 	}
 ],
 
@@ -30,8 +24,9 @@
 	[
 		{
 			"type": "docker-tag",
-			"repository": "dockreg.el.nist.gov:8080/testweb",
-			"tag": "latest"
+			"repository": "principal.el.nist.gov:5000/testweb",
+			"tag": "latest",
+			"force": "true"
 		},
 		"docker-push"
 	]
